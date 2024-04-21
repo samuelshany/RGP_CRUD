@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('price');
             $table->string('photo');
             $table->foreignIdFor(Category::class);
-            $table->boolean('active');
+            $table->boolean('active')->default(1);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -33,7 +33,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-      
+
         Schema::dropIfExists('products');
     }
 };

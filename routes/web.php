@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
 use App\Models\Admin;
+use App\Models\Lang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -27,6 +28,20 @@ use function App\Helpers\getLangs;
 Route::get('/admin/login', function () {
 
     $admins = Admin::get();
+    $langs = Lang::get();
+    if(count($langs)==0)
+    {
+        $l= new Lang();
+        $l->name='العربية';
+        $l->abbr='ar';
+        $l->active=1;
+        $l->save();
+        $l= new Lang();
+        $l->name='english';
+        $l->abbr='en';
+        $l->active=1;
+        $l->save();
+    }
     if(count($admins)==0)
     {
         $admin = new Admin();
